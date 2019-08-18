@@ -4,6 +4,9 @@ import DataStructure.tree.Node;
 
 public class Diameter {
 
+	public static boolean isLeftFound = false;
+	public static boolean isRightFound = false;
+	
 	public static void main(String[] args) {
 		BinaryTree tree = new BinaryTree();
 		tree.root = new Node(1);
@@ -24,6 +27,71 @@ public class Diameter {
         System.out.println(diameter1(tree.root, new HeightClass()));
   
 	}
+	
+	
+	
+	static int findLCA(Node root, int num1, int num2){
+		
+		if(root.left == null && root.right == null) {
+			return Integer.MIN_VALUE;
+		}
+		
+		//check in left 
+		boolean isLeft = isFound(root.left, num1, num2) ;
+		if(isLeft) {
+			
+		}
+		
+		if(isLeftFound && isRightFound) {
+			return root.key;
+		}
+		
+		isFound(root.left, num1, num2) ;
+		if(isLeftFound && isRightFound) {
+			return root.key;
+		}
+		
+		
+		int left = findLCA(root.left, num1, num2);
+		if( left != -1) {
+			return left;
+		}
+		
+		int right = findLCA(root.right, num1, num2);
+		if( right != -1) {
+			return right;
+		}
+		
+		//check in right
+		
+		return 1;
+		
+	}
+	
+	static boolean isFound(Node root, int num1, int num2){
+		if(root != null && (root.key == num1 || root.key == num2)) {
+			return true;
+		}
+		
+		if(!isLeftFound && root.key == num1) {
+			isLeftFound = true;
+			return true;
+		}
+		
+		if(!isRightFound && root.key == num1) {
+			isRightFound = true;
+			return true;
+		}
+		//check in left 
+		
+		
+		//check in right
+		
+		return true;
+		
+	}
+	
+
 
 	private static int diameter(Node root) {
 		if(root == null) return 0;

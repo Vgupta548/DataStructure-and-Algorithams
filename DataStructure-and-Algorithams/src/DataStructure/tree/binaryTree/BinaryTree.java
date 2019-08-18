@@ -14,4 +14,9 @@ public class BinaryTree {
 		root = null;
 	}
 
+	public Node constructTree(int[] pre, int size) {
+		
+		return null;
+	}
+
 }
